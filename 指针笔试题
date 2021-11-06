@@ -1,0 +1,36 @@
+知识点：1.   加减1的跨度与指针类型有关
+
+
+
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int a[5] = {1,2,3,4,5};
+    int *ptr = (int *)(&a+1);//&a是一个数组地址，但ptr存放的是整形地址
+    printf("%d,%d", *(a+1),*(ptr-1));//总结 本题关键点在于指针类型的转换，而加减1的跨度与指针类型有关，所以打印的是5
+    return 0;
+}
+
+
+#include<stdio.h>
+#include<string.h>
+struct test
+{
+    int a;
+    int b;
+    int c;
+    int d;
+    int e;
+}*p;
+
+本题结构体变量的大小20字节
+int main()
+{
+    p = (struct test*)0x100000;
+    printf("%p\n", p);
+    printf("%p\n", p+1);
+    printf("%p\n", (unsigned long )p + 0x1);
+    printf("%p\n", (unsigned int* )p + 0x1);
+    return 0;
+}
